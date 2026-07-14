@@ -19,10 +19,17 @@ runs:
 
         if [ "$VERSION" = 'canary' ]; then
           echo -e "\033[36mCloning Source to $TEMP/binaryen\033[0m"
-          gh repo clone WebAssembly/binaryen "$TEMP/binaryen" -- --recurse-submodules
+          gh repo clone WebAssembly/binaryen "$TEMP/binaryen" \
+            -- --recurse-submodules
 
           echo -e "\033[36mBuilding...\033[0m"
-          cmake -S "$TEMP/binaryen" -B "$TEMP/binaryen" && make -C "$TEMP/binaryen"
+
+          cmake \
+            -S "$TEMP/binaryen"\
+            -B "$TEMP/binaryen"\
+            -DCMAKE_INSTALL_PREFIX="$TEMP" \
+            -DCMAKE_BUILD_TYPE=RELEASE
+          cmake --build "$TEMP/binaryen" --config RELEASE --target install
         else
           if [ "$VERSION" = 'latest' ]; then
             echo -e "\033[36mFetching Versions...\033[0m"
@@ -64,4 +71,5 @@ runs:
         ls "$TEMP/binaryen/bin"
 
         echo -e "\033[36mAdding $TEMP/binaryen/bin to PATH\033[0m"
-        echo -e "$(cd "$TEMP/binaryen/bin" && pwd -W 2>/dev/null || pwd)" >> $GITHUB_PATH
+        echo -e "$(cd "$TEMP/binaryen/bin" && pwd -W 2>/dev/null || pwd)" \
+          >> $GITHUB_PATH
