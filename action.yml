@@ -52,13 +52,13 @@ runs:
               -O - \
               | tar -xzC $TEMP/binaryen --strip-components=1
 
-            if "TEMP/binaryen/bin/wasm-opt" --version >/dev/null 2>&1; then
+            if "$TEMP/binaryen/bin/wasm-opt" --version >/dev/null 2>&1; then
               break
             fi
             echo -e "\033[36mBad Find\033[0m"
             rm -rf "$TEMP/binaryen"
           done
-          if ! "TEMP/binaryen/bin/wasm-opt" --version >/dev/null 2>&1; then
+          if ! "$TEMP/binaryen/bin/wasm-opt" --version >/dev/null 2>&1; then
             echo -e "\033[36mNo Assets Work!\033[0m"
             exit 1
           fi
