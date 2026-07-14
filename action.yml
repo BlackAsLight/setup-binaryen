@@ -39,7 +39,7 @@ runs:
             echo -e "\033[36mProvided Version: $VERSION\033[0m"
           fi
 
-          for ASSET in ($gh release view $VERSION \
+          for ASSET in $(gh release view $VERSION \
             --repo WebAssembly/binaryen \
             --json assets \
             -q '.assets[].name | select(test("\\.tar\\.gz$"))')
