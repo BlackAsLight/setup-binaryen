@@ -30,6 +30,9 @@ runs:
             -DCMAKE_INSTALL_PREFIX="$TEMP" \
             -DCMAKE_BUILD_TYPE=RELEASE
           cmake --build "$TEMP/binaryen" --config RELEASE --target install
+
+          echo -e "\033[36mCleaning Up...\033[0m"
+          rm -rf "$TEMP/binaryen"
         else
           if [ "$VERSION" = 'latest' ]; then
             echo -e "\033[36mFetching Versions...\033[0m"
@@ -65,11 +68,14 @@ runs:
             echo -e "\033[36mNo Assets Work!\033[0m"
             exit 1
           fi
+
+          echo -e "\033[36mCleaning Up...\033[0m"
+          mv "$TEMP/binaryen/*" "$TEMP/"
+          rm -rf "$TEMP/binaryen"
         fi
 
-        echo -e "\033[36mls $TEMP/binaryen/bin\033[0m"
-        ls "$TEMP/binaryen/bin"
+        echo -e "\033[36mls $TEMP/bin\033[0m"
+        ls "$TEMP/bin"
 
-        echo -e "\033[36mAdding $TEMP/binaryen/bin to PATH\033[0m"
-        echo -e "$(cd "$TEMP/binaryen/bin" && pwd -W 2>/dev/null || pwd)" \
-          >> $GITHUB_PATH
+        echo -e "\033[36mAdding $TEMP/bin to PATH\033[0m"
+        echo -e "$(cd "$TEMP/bin" && pwd -W 2>/dev/null || pwd)" >> $GITHUB_PATH
