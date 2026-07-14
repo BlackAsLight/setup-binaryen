@@ -22,8 +22,7 @@ runs:
           gh repo clone WebAssembly/binaryen "$TEMP/binaryen" -- --recurse-submodules
 
           echo -e "\033[36mBuilding...\033[0m"
-          $(cmake -S "$TEMP/binaryen" -B "$TEMP/binaryen" && make -C "$TEMP/binaryen")
-
+          cmake -S "$TEMP/binaryen" -B "$TEMP/binaryen" && make -C "$TEMP/binaryen"
         else
           if [ "$VERSION" = 'latest' ]; then
             echo -e "\033[36mFetching Versions...\033[0m"
