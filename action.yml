@@ -70,7 +70,7 @@ runs:
           fi
 
           echo -e "\033[36mCleaning Up...\033[0m"
-          mv "$TEMP/binaryen/*" "$TEMP/"
+          mv $TEMP/binaryen/* "$TEMP/"
           rm -rf "$TEMP/binaryen"
         fi
 
