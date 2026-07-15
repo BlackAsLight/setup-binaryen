@@ -1,14 +1,18 @@
 # Setup Binaryen
 
 ## Example
+
 ```yaml
-- uses: BlackAsLight/setup-binaryen@v2.0.0
+- uses: BlackAsLight/setup-binaryen@v2.1.0
   env:
     GH_TOKEN: ${{ github.token }}
   with:
     # Version can be one of:
-    # - "canary": Clones the Binaryen repo and builds from source.
-    # - "latest": (Default) Downloads the latest release binaries from GitHub Releases.
-    # - A specific release tag (e.g., "version_124"): downloads that exact version's binaries.
+    # - "latest" (default): Download the latest Github Release binaries.
+    # - "canary": Build Binaryen from the latest source.
+    # - A specific release tag (for example, "version_124"): Download that release's binaries.
     version: version_124
+
+    # Whether to save time by using actions/cache. Defaults to true.
+    cache: true
 ```
