@@ -45,7 +45,7 @@ runs:
     - name: Restore Cache
       id: cache
       if: inputs.cache == 'true'
-      uses: actions/cache/restore@v5
+      uses: actions/cache/restore@v6
       with:
         path: ~/.binaryen
         key: ${{ steps.source.outputs.key }}
@@ -100,7 +100,7 @@ runs:
         fi
     - name: Save Cache
       if: steps.cache.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v5
+      uses: actions/cache/save@v6
       with:
         path: ~/.binaryen
         key: ${{ steps.source.outputs.key }}
